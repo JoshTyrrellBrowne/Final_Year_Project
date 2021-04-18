@@ -1,0 +1,15 @@
+Notes on HTML:
+- in Base.html, the stylesheet and 3 scripts at the end are from: https://getbootstrap.com/docs/4.3/getting-started/introduction/
+- The above stuff is for styles and pre made features for the website
+- GET:
+    - is unsecure way of sending information
+
+- POST:
+    - secure
+
+
+- Sessions:
+    - Temporary, holds variables (e.g login details)
+    - stored on the server, not client side
+    - session["varName"] = var (this how u save var)
+    - permenant session retains the memory info of that user for a while/set time
