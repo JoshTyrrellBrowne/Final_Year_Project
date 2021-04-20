@@ -38,7 +38,7 @@ def get_binance_bars(symbol, interval, startTime, endTime):
     return df
 
 
-# get_binance_bars('ETHUSDT', '1h', dt.datetime(2020, 1, 1), dt.datetime(2020, 2, 1))
+  # get_binance_bars('ETHUSDT', '1h', dt.datetime(2020, 1, 1), dt.datetime(2020, 2, 1))
 
 def get_eth_usd_graph():
     months = [dt.datetime(2020, i, 1) for i in range(1, 13)]
@@ -83,10 +83,10 @@ def set_future_and_target_columns(csv_data_df):
 def get_eth_data_past_seven_days():
     colnames = ['time_ID', 'datetime', 'close', 'avg_twitter_sentiment', 'future_close', 'target']
     dataset = 'MachineLearning/MyDatasets/ML_training_data_ETH.csv'
-    csv_data_df = pd.DataFrame(columns=colnames)
+    csv_data_df = pd.read_csv(dataset)  #pd.DataFrame(columns=colnames)
 
-    days = [dt.datetime(2021, 4, i) for i in range(13, 16)]
-    days.insert(0, dt.datetime(2021, 3, 31))  # we need the day before the beginning for calc future_close & target
+    days = [dt.datetime(2021, 4, i) for i in range(18, 20)]
+    # days.insert(0, dt.datetime(2021, 3, 31))  # we need the day before the beginning for calc future_close & target
 
     # BELOW: months[i+1] - dt.timedelta(0, 1) is for subtracting 1 second from the date so that it doesnt go outside list
     df_list = [get_binance_bars('ETHUSDT', '1h', days[i], days[i + 1] - dt.timedelta(0, 1)) for i in
@@ -106,7 +106,7 @@ def get_eth_data_past_seven_days():
     return df
 
 
-#get_eth_data_past_seven_days()
+get_eth_data_past_seven_days()
 
 
 def csv_data_binding():

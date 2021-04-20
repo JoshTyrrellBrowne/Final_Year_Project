@@ -72,7 +72,7 @@ def remove_stopwords(text):
 
 def perform_stemming_and_lammitization(text):
     # Stemming:
-    ps = nltk.PorterStemmer()
+    ps = nltk.PorterStemmer()  # remove suffixs from end of word (e. running -> run)
     text = [ps.stem(word) for word in text]
 
     # Lemmatizer
@@ -117,7 +117,7 @@ def append_sentiment_to_training_data():
     sentiment_analyzer = SentimentIntensityAnalyzer()
     print(len(datetime_data))  # this just so ya know where to start from baii
     # Loop each datetime, acquire relevant tweets posted in the hour interval, calc avg sentiment and update the training data csv
-    for i in range(0, len(datetime_data) - 1):
+    for i in range(360, len(datetime_data) - 1):
         row = csv_data.loc[csv_data['datetime'] == datetime_data[i]]
         if not math.isnan(row['avg_twitter_sentiment']):
             continue
