@@ -1,0 +1,75 @@
+{% extends "Base.html" %}
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    {% if category == 'error' %}
+                        <div class="alert alert-danger alter-dismissible fade show" role="alert">
+                            {{msg}}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success alter-dismissible fade show" role="alert">
+                            {{msg}}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+    {% endwith %}
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <button type="button" style="color: black; border-color: #FFD700; background-color: #FFD700;">
+                <a href="/ada">Cardano</a></button>
+            <button type="button" style="color: black; border-color: #FFD700; background-color: #FFD700;">
+                <a href="/eth">Ethereum</a></button>
+            <button type="button" style="color: black; border-color: #FFD700; background-color: #FFD700;">
+                <a href="/btc">Bitcoin</a></button>
+        </div>
+    </div>
+
+    <section>
+        <h2>This Currencies Price Chart:</h2>
+        <!-- <img src="data:image/png;base64, {{ plot_url }}">  this is the old way from generated graph -->
+        <p> <img src="{{ price_graph }}" style="border:10px solid black;"> </p>
+
+        <textarea name="TextBox_LongTerm" cols="100" rows="4" style="font-size:150%; color: black; border-color: #FFD700; background-color: #FFD700;">The above graph represents the price data for the currency since its creation date to the present. The data was collected from queries to the Binance API. The data visualisation in graph form was created using the "matplotlib" Python library.
+        </textarea>
+    </section>
+
+    <section>
+        <h2>Sentiment Chart:</h2>
+        <!-- <img src="data:image/png;base64, {{ plot_url }}">  this is the old way from generated graph -->
+        <p> <img src="{{ sentiment_graph }}" style="border:10px solid black;"> </p>
+        <textarea name="TextBox_LongTerm" cols="100" rows="6" style="font-size:150%; color: black; border-color: #FFD700; background-color: #FFD700;">The above chart represents sentiment data plotted on a graph along with price data, it is done this way so we can compare the sentiment trends against the price trends. The two graphs match on the Y axis which represents date times. The sentiment data was generated from collected from collected tweets from the Twitter API and the sentiment values were calculated using the NLTK libraries Sentiment Analyzer.
+        </textarea>
+    </section>
+
+    <section>
+        <h2>Word Cloud From Twitter Data:</h2>
+        <p> <img src="{{ wordcloud_img }}" style="border:10px solid black;"> </p>
+        <textarea name="TextBox_LongTerm" cols="100" rows="3" style="font-size:150%; color: black; border-color: #FFD700; background-color: #FFD700;">The above is a word cloud image. It was generated from a collection of the twitter data retrieved for sentiment analysis.
+        </textarea>
+    </section>
+
+    <section>
+        <h2>The results of my LSTM Model trained on data for this currency:</h2>
+        <p> <img src="{{ LSTM_results_img }}" style="border:10px solid black;"> </p>
+        <textarea name="TextBox_LongTerm" cols="100" rows="5" style="font-size:150%; color: black; border-color: #FFD700; background-color: #FFD700;">The above represents the predicted values that were generated from my trained LSTM Recurrent Neural Network model. The predicted values are plotted against the true price values to give us an idea of the accuracy in the predictions. The predictions here are for the next 3 days after the training data set used for training this model.
+        </textarea>
+    </section>
+
+    <section>
+        <p> <img src="{{ LSTM_results_onTrainingData_img }}" style="border:10px solid black;"> </p>
+
+        <textarea name="TextBox_LongTerm" cols="100" rows="3" style="font-size:150%; color: black; border-color: #FFD700; background-color: #FFD700;">The above represents more predicted values from the model. These values are the models predictions on the training data.
+        </textarea>
+    </section>
+
+{% endblock %}
